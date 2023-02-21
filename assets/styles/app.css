@@ -1,0 +1,214 @@
+body {
+    font-size: 18px;
+    font-family: sans-serif;
+    background: #F5F5F5;
+    margin: 0;
+}
+
+.main {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-template-columns: 30% 70%;
+}
+
+.leftDiv {
+    background: #F5F5F5;
+    padding: 20px;
+}
+
+.leftDiv input[type=text] {
+    border: 1px solid grey;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.submitButton {
+    margin-top: 10px;
+    width: 80%;
+    height: 50px;
+    background: black;
+    border: 2px solid white;
+    border-radius: 5px;
+    color: white;
+    font-weight: bolder;
+}
+
+.submitButton:hover {
+    background: white;
+    color: black;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.submitButton:hover a{
+    color: black;
+}
+
+.submitButton a {
+    text-decoration: none;
+    color: white;
+}
+
+.rightDiv {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightDiv .bookResult{
+    text-align: center;
+    background: #F5F5F5;
+    width: 300px;
+    height: auto;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+#authorImage {
+    width: 200px;
+    height: auto;
+}
+
+.navWrapper {
+    width: 100%;
+    background-color: whitesmoke;
+    display: inline-block;
+    position: fixed;
+    bottom: 0;
+}
+
+.greetingWrapper {
+    float: left;
+}
+
+.navButtonWrapper {
+    float: right;
+    display: flex;
+    grid-column: 1;
+    column-gap: 10px;
+}
+
+.navBtn {
+    background: white;
+    padding: 10px;
+    border: 2px solid black;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.navBtn a {
+    text-decoration: none;
+    color: black;
+}
+
+.mainReviewWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviewWrapper {
+    margin: 0 auto;
+    width: 800px;
+    height: 450px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-areas:
+    "sidebar header header next"
+    "sidebar content content next"
+    "sidebar footer  footer next";
+    box-shadow: 10px 10px 50px whitesmoke;
+    border-radius: 5px;
+}
+
+.imageSection {
+    grid-area: sidebar;
+    background: white;
+    border: 1px solid lightgray;
+}
+
+.imageSection img{
+    height: 100%;
+    width: 100%;
+}
+
+.bookSection {
+    padding: 5px;
+    background: #F2F2F2;
+    grid-area: header;
+    height: 50px;
+    border: 1px solid lightgray;
+}
+
+.reviewTextWrapper {
+    padding: 5px;
+    grid-area: content;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    background: white;
+}
+
+.reviewerWrapper {
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    color: black;
+    background: #F2F2F2;
+    text-align: right;
+    grid-area: footer;
+    height: auto;
+    padding-right: 10px;
+}
+
+.nextWrapper {
+    border: 1px solid lightgray;
+    grid-area: next;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.nextWrapper button {
+    width: 50%;
+    height: 40px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none
+}
+
+.nextWrapper button:active {
+    background: #0f172a;
+    color: white;
+}
+
+.nextWrapper button:hover {
+    background: lightgray;
+    color: black;
+}
+
+.bookSearchSection {
+    width: 350px;
+}
+
+.hintDiv {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 2px;
+}
+
+.hintDiv:hover {
+    background: lightgray;
+    cursor: pointer;
+}

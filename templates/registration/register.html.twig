@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Register</h1>
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.username, {
+                label: 'Username'
+            }) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_end(registrationForm) }}
+
+            <button class="submitButton"><a href="{{ path('login') }}">Go To Login!</a></button>
+        </div>
+        <div class="rightDiv">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{# templates/Default/login.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="main">
+    <div class="leftDiv">
+        <h1>Homepage :) {% if user %}Hi, {{ user.username }}{% endif %}</h1>
+        {% if user %}
+            <button class="submitButton"><a href="{{ path('book') }}">Add a book</a></button>
+            <button class="submitButton"><a href="{{ path('findBook') }}">Add a review</a></button>
+            <button class="submitButton"><a href="{{ path('profile') }}">Your Profile</a></button>
+        {% endif %}
+        <button class="submitButton"><a href="{{ path('logout') }}">Bye bye!</a></button>
+    </div>
+
+    <div class="rightDiv">
+        <div class="mainReviewWrapper">
+            <div class="reviewWrapper">
+                <div class="imageSection">
+                    {% if book.image != null %}
+                        <img alt="Image Book" src="{{ asset('/assets/images/books/' ~ book.image) }}">
+                    {% else %}
+                        <p>No Photo</p>
+                    {% endif %}
+                </div>
+                <div class="bookSection">
+                    <p id="titleAuthorText">Book: {{ book.title }} By {{ book.author }}</p>
+                </div>
+                <div class="reviewTextWrapper">
+                    <p id="reviewText">{{ review.review }}</p>
+                    <p id="reviewDate">Date: {{ review.date }}</p>
+                </div>
+                <div class="reviewerWrapper">
+                    <p id="reviewerText">Reviewer: {{ reviewer.username }}</p>
+                </div>
+                <div class="nextWrapper">
+                    <button onclick="getRandomReview()"> > </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- AJAX Autocomplete search script -->
+    <script type="text/javascript">
+
+        //The maximum is inclusive and the minimum is inclusive
+        function getRandomIntInclusive()  {
+            let min = 0;
+            let max = 10;
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return  Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        function getRandomReview() {
+
+            let int = Math.trunc(Math.random() * 5);
+
+            let titleAuthorText = document.getElementById("titleAuthorText");
+            let reviewText = document.getElementById("reviewText");
+            let dateText = document.getElementById("reviewDate");
+            let reviewerText = document.getElementById("reviewerText");
+
+            let url = '{{ path("getReview", {'l': 'number'}) }}';
+            url = url.replace("number", int);
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.response !== "No Reviews Found") {
+
+                    let review = JSON.parse(this.responseText);
+
+                    review.forEach(function(obj){
+                        titleAuthorText.innerHTML = obj.title + ' By ' + obj.author;
+                        reviewText.innerHTML = obj.reviewText;
+                        dateText.innerHTML = 'Added On: ' + obj.date;
+                        reviewerText.innerHTML = 'By: ' + obj.reviewer;
+                    });
+
+                } else if(this.response === 'No Reviews Found'){
+                    getRandomReview();
+                }
+            }
+            xmlhttp.open("GET", url , true);
+            xmlhttp.send();
+        }
+    </script>
+    <!-- AJAX autocomplete search script -->
+
+{% endblock %}
+

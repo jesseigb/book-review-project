@@ -1,0 +1,17 @@
+{# templates/Default/book.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Add A Book</h1>
+            {{ form(form) }}
+            <button class="submitButton"><a href="{{ path('home') }}">Back to home</a></button>
+        </div>
+        <div class="rightDiv">
+            <p>Let's Go! :)</p>
+        </div>
+    </div>
+{% endblock %}

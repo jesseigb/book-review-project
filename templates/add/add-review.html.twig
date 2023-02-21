@@ -1,0 +1,21 @@
+{# templates/Default/add-review.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Found the book, add the review</h1>
+            <p>{{ book.title }}</p>
+            <p>By {{ book.author }}</p>
+            {% if id %}
+                {{ form(form) }}
+            {% endif %}
+            <button class="submitButton"><a href="{{ path('home') }}">Back to home</a></button>
+        </div>
+        <div class="rightDiv">
+            <p>Nice One! :£</p>
+        </div>
+    </div>
+{% endblock %}

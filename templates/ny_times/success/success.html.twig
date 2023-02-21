@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Select Book From NYTimes{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+
+</div>
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Yes, Success! ✅</h1>
+            <p>Your review has been successfully added</p>
+            <button class="submitButton"><a href="{{ path('home') }}">Back To Home</a></button>
+            <button class="submitButton"><a href="{{ path('NYTimesHome') }}">Search NY Times Books</a></button>
+        </div>
+
+        <div class="rightDiv">
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="leftDiv">
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <form action="{{ path('login') }}" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password"/>
+
+                <!-- <input type="hidden" name="_home" value="{{ path('home') }}"/> -->
+
+                <button type="submit">login</button>
+            </form>
+
+            <button class="submitButton"><a href="{{ path('registration') }}">Go To Registration!</a></button>
+        </div>
+        <div class="rightDiv">
+
+        </div>
+    </div>
+{% endblock %}

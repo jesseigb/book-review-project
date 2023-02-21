@@ -1,0 +1,28 @@
+{# templates/Default/login.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+
+{% block body %}
+        <div class="main">
+            <div class="leftDiv">
+                <h1>You are at the profile</h1>
+                <p> Hello, {{ user.username }}</p>
+                <button class="submitButton"><a href="{{ path('home') }}">Go To Home!</a></button>
+
+                <h2>My Reviews</h2>
+            </div>
+            <div class="rightDiv">
+                {% for review in myReviews %}
+                    <div class="bookResult">
+                        <p>{{ review.book.title }}</p>
+                        <p>{{ review.review }}</p>
+                        <p>{{ review.date }}</p>
+
+                        <form action="{{ path('editReview', {id: review.id}) }}" method="post">
+                            <input class="submitButton" type="submit" value="Edit Review">
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}

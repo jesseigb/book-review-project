@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search From NYTimes Books{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Choose Book! ✅</h1>
+            <p>Powered By NY Times</p>
+            <p>Choose from the wide catalog of reviewed books by writer and journalist of the NY Times</p>
+            <button class="submitButton"><a href="{{ path('NYTimesHome') }}">Search NY Times Books</a></button>
+        </div>
+        <div class="rightDiv">
+                {% for book in books %}
+                    <div class="bookResult">
+                        <p>{{ book.book_title }}</p>
+                        <p>By <a href="{{ path('authorInfo', {name: book.book_author}) }}">{{ book.book_author }}</a></p>
+                        <p>{{ book.summary }}</p>
+                        <p>Reviewed: {{ book.publication_dt }}</p>
+                        <p><a href="{{ book.url }}">Read the review by {{ book.byline }}</a></p>
+                        <button class="submitButton"><a href="{{ path('reviewNYTimesBook', {author: book.book_author, title: book.book_title }) }}">Review</a></button>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock %}

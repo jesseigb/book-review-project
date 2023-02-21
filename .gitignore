@@ -1,10 +1,18 @@
+node_modules
+migrations
+vendor
+var
 
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+.env.local.php
+.idea
+.env
+
+composer.lock
+composer.json
+composer.phar
+docker-compose.override.yml
+docker-compose.yml
+package-lock-.json
+package.json
+symfony.lock
+webpack.config.js

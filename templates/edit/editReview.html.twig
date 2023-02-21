@@ -1,0 +1,24 @@
+{# templates/Default/findBook.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Found your review, edit it!</h1>
+            {{ form_start(form) }}
+
+            {{ book.title }}
+            By {{ book.author }}
+            {{ form_widget(form.Review, {'value' : review.review}) }}
+
+            {{ form_end(form) }}
+            <button class="submitButton"><a href="{{ path('home') }}">Back to home</a></button>
+        </div>
+        <div class="rightDiv">
+            <p>Yay! :P</p>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Review Book{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Review {{ book.book_title}} By {{ book.book_author}} ✅</h1>
+            <p>Powered By The New York Times</p>
+            {{ form(form) }}
+        </div>
+        <div class="rightDiv">
+            <h4>Read the official reviews by The NY Times Publishers</h4>
+            <br>
+            <div class="bookResult">
+                {% for book in bookList %}
+                    <p>By <a href="{{ book.url }}">{{ book.byline|lower }} - {{ book.publication_dt }}</a></p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

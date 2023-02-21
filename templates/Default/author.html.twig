@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author Info{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="leftDiv">
+            {% if info == 'No Author Found' %}
+                <h1>No Author Found</h1>
+            {% else %}
+                <h1>More Info About: {{ name }} ✅</h1>
+                {% if photo == 'noimage.jpg' %}
+                    <img id="authorImage" {{ asset('/assets/images/books/' ~ photo) }}">
+                {% else %}
+                    <img id="authorImage" src="{{ photo.webformatURL }}">
+                {% endif %}
+
+                <p>Sex: {{ info.gender }}</p>
+                <p>Nationality: {{ info.nationality }}</p>
+                <p>DoB: {{ info.birthday }}</p>
+                <p>Age: {{ info.age }}</p>
+                <p>Career Occupation(s): </p>
+                <ul>
+                    {% for occupation in info.occupation %}
+                        <li>{{ occupation }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <button class="submitButton"><a href="{{ path('home') }}">Back To Home</a></button>
+            <button class="submitButton"><a href="{{ path('NYTimesHome') }}">Search NY Times Books</a></button>
+        </div>
+        <div class="rightDiv">
+            {% if not books %}
+                <p>Sorry, No Books Found :/</p>
+            {% endif %}
+            {% for book in books %}
+                <div class="bookResult">
+                    <p>{{ book.title }}</p>
+                    <p>By {{ book.author }}</p>
+                    <p>{{ book.summary }}</p>
+                    <button class="submitButton"><a href="{{ path('home') }}">Review</a></button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{# templates/Default/findBook.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+{% block title %}Search Book{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="leftDiv">
+            <h1>Search Book</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form.bookname, {'attr': {'class': 'booknameInput', 'value': ''}}) }}
+            {{ form_widget(form.send)}}
+            {{ form_end(form) }}
+
+            <div id="resultWrapper" style="width: 100%">
+            </div>
+            <button class="submitButton"><a href="{{ path('home') }}">Back to home</a></button>
+        </div>
+        <div class="rightDiv">
+            <div style="text-align: center; width: 300px; height: 400px">
+                <h3>Can't find the book?</h3>
+                <button class="submitButton"><a href="{{ path('NYTimesHome') }}">Find More Books Here</a></button>
+                <p style="font-size: 10px">Powered by The New York Times</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AJAX Autocomplete search script -->
+    <script type="text/javascript">
+
+        let searchInput = document.getElementById('form_bookname');
+        searchInput.addEventListener("keyup", getBookByName);
+
+        function getBookByName() {
+            let str = searchInput.value;
+            let resultWrapper = document.getElementById("resultWrapper");
+            if (str === '') {
+                resultWrapper.innerHTML = "";
+            }
+            let url = '{{ path("getBookHint", {'l': 'title'}) }}';
+            url = url.replace("title", str);
+
+            let xmlhttp = new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange = function() {
+                    if (this.response !== "No Books Found") {
+
+                        resultWrapper.innerHTML = "";
+                        let book = JSON.parse(this.responseText);
+
+                        book.forEach(function(obj){
+                            let bookName = document.createElement("p");
+                            let resultDiv = document.createElement("div");
+
+                            bookName.innerHTML = obj.title;
+                            resultDiv.classList.add("hintDiv");
+
+                            resultDiv.appendChild(bookName);
+                            resultWrapper.appendChild(resultDiv);
+
+                            let text = resultDiv.children[0];
+                            resultDiv.addEventListener("click", function populateSearch() {
+                                searchInput.value = text.innerHTML;
+                            });
+                        });
+
+                    } else if(this.response === 'No Books Found'){
+                        resultWrapper.innerHTML = "";
+                        let bookName = document.createElement("p");
+                        let resultDiv = document.createElement("div");
+
+                        bookName.innerHTML = 'No Books Found';
+
+                        resultDiv.appendChild(bookName);
+                        resultWrapper.appendChild(resultDiv);
+                    }
+            }
+            xmlhttp.open("GET", url , true);
+            xmlhttp.send();
+        }
+    </script>
+    <!-- AJAX autocomplete search script -->
+{% endblock %}

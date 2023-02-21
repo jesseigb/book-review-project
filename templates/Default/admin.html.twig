@@ -1,0 +1,33 @@
+{# templates/Default/login.html.twig #}
+
+{% extends 'Default/layout.html.twig' %}
+
+{% block body %}
+    <h1>You are at the admin page</h1>
+    <p>Hello {{ user.username }}</p>
+    {% for review in allReview %}
+        <p>{{ review.book.title }} By {{ review.book.author }}</p>
+        <p>{{ review.review }}</p>
+        <p>Reviewer: {{ review.creator.username }}
+        {% if review.creator.status == 0 %}
+            Status: Banned
+        {% else %}
+            Status: Active
+        {% endif %}
+        </p>
+        <form action="{{ path('deleteReview', {id: review.id}) }}" method="post">
+            <button>Delete Review</button>
+        </form>
+        {% if review.creator.status == 0 %}
+            <form action="{{ path('activateUser', {id: review.creator.id}) }}" method="post">
+                <button>Unban Reviewer</button>
+            </form>
+        {% else %}
+            <form action="{{ path('deleteUser', {id: review.creator.id}) }}" method="post">
+                <button>Ban Reviewer</button>
+            </form>
+        {% endif %}
+        <p>-------------------------------------------------------</p>
+    {% endfor %}
+    <p><a href="{{ path('home') }}">Back To Home</a></p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Success!{% endblock %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="leftDiv">
+            <p>:)</p>
+            <h1>Success ✅</h1>
+            <p>Your review of the book {{ review.book.title }} has been successfully updated</p>
+            <button class="submitButton"><a href="{{ path('profile') }}">Back To Profile</a></button>
+            <button class="submitButton"><a href="{{ path('home') }}">Back To Home</a></button>
+        </div>
+        <div class="rightDiv">
+        </div>
+    </div>
+{% endblock %}

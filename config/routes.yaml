@@ -1,3 +1,164 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+login:
+    path: /login
+    controller: App\Controller\LoginController:index
+
+registration:
+    path: /registration
+    controller: App\Controller\RegistrationController::index
+
+home:
+    path: /home
+    controller: App\Controller\MainController::homeResponse
+
+findBook:
+    path: /add/findBook
+    controller: App\Controller\MainController::findBookResponse
+
+addReview:
+    path: /add/review/{bookname}
+    controller: App\Controller\MainController::addReview
+
+editReview:
+    path: /edit/review/{id}
+    controller: App\Controller\MainController::editReview
+
+book:
+    path: /add/book
+    controller: App\Controller\MainController::addBookResponse
+
+profile:
+    path: /profile
+    controller: App\Controller\MainController::profileResponse
+
+editSuccess:
+    path: /success/editReview/{id}
+    controller: App\Controller\MainController::editSuccess
+
+getBookHint:
+    path: /getBookHint/{l}
+    controller: App\Controller\MainController::searchBook
+
+getReview:
+    path: /getReview/{l}
+    controller: App\Controller\MainController::searchReview
+
+admin:
+    path: /admin
+    controller: App\Controller\MainController::adminResponse
+
+deleteReview:
+    path: /deleteReview/{id}
+    controller: App\Controller\MainController::deleteReview
+
+deleteUser:
+    path: /deleteUser/{id}
+    controller: App\Controller\MainController::deleteUser
+
+activateUser:
+    path: /activateUser/{id}
+    controller: App\Controller\MainController::activateUser
+
+logout:
+    path: /logout
+    methods: GET
+
+#----------------- API Consumption From NY Times Section -------------------#
+
+NYTimesHome:
+    path: /nytimesbooks
+    controller: App\Controller\NYTimesController::index
+
+searchNYTimesBook:
+    path: /nytimesbooks/search/{title}/{author}
+    controller: App\Controller\NYTimesController::searchBook
+    defaults: {title: '', author: ''}
+
+reviewNYTimesBook:
+    path: /nytimesbooks/review/add/{author}/{title}
+    controller: App\Controller\NYTimesController::reviewNYTimesBook
+    defaults: {author: '', title: ''}
+
+reviewNYTimesBooksSuccess:
+    path: /nytimesbooks/review/success
+    controller: App\Controller\NYTimesController::reviewSuccess
+
+# ------------ API Consumption For Author Info And Pic Section ------------------#
+
+authorInfo:
+    path: /author/info/{name}
+    controller: App\Controller\AuthorInfoController::index
+    defaults: {name: ''}
+
+
+# ---------------- API Route Section ----------------#
+
+# --------------- GET Requests Routes --------------#
+
+get_books:
+    path: /api/v1/books
+    controller: App\Controller\APIController::getBooks
+    methods: GET
+
+get_book:
+    path: /api/v1/book/{id}
+    controller: App\Controller\APIController::getBook
+    methods: GET
+
+get_book_by_title:
+    path: /api/v1/book/title/{bookTitle}
+    controller: App\Controller\APIController:getBooksByTitle
+    defaults: {bookTitle: ''}
+    methods: GET
+
+get_book_by_author:
+    path: /api/v1/book/author/{authorName}
+    controller: App\Controller\APIController:getBooksbyAuthor
+    defaults: {$authorName: ''}
+    methods: GET
+
+get_book_by_genre:
+    path: /api/v1/book/genre/{genreName}
+    controller: App\Controller\APIController:getBooksbyGenre
+    defaults: {genreName: ''}
+    methods: GET
+
+get_reviews:
+    path: /api/v1/reviews
+    controller: App\Controller\APIController::getReviews
+    methods: GET
+
+get_review:
+    path: /api/v1/review/{id}
+    controller: App\Controller\APIController::getReview
+    methods: GET
+
+get_user_reviews:
+    path: /api/v1/user/{id}/reviews
+    controller: App\Controller\APIController::getUserReviews
+    methods: GET
+
+# --------------- PUT Requests Route --------------#
+
+put_review:
+    path: /api/v1/review/{id}
+    controller: App\Controller\APIController::putReview
+    methods: PUT
+
+# --------------- DELETE Requests Route --------------#
+
+delete_review:
+    path: /api/v1/review/{id}
+    controller: App\Controller\APIController::deleteReview
+    methods: DELETE
+
+# --------------- POST Requests Route --------------#
+post_review:
+    path: /api/v1/review/{bookID}
+    controller: App\Controller\APIController::postReview
+    methods: POST
+
+# ----------------- OAuth Authenticator Section --------------- #
+authUser:
+    path: /oauth/v2/token
+    controller: App\Controller\APIController::authoriseUser
+    methods: POST
